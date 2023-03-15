@@ -100,6 +100,13 @@ yum install -y kubeadm-1.15.6-0.x86_64 kubelet-1.15.6-0.x86_64 kubectl-1.15.6-0.
 Initialize Kubernetes cluster on MASTER node using command:
 kubeadm init --apiserver-advertise-address=<master-node-private-ip> --pod-network-cidr=192.168.0.0/16
   
+  mkdir -p /etc/containerd
+containerd config default > /etc/containerd/config.toml
+systemctl restart containerd
+  
+  sudo apt-get install -y linux-modules-extra-$(uname -r)
+
+  
 Run the following command to copy kube config file:
 mkdir /home/kubeuser/.kube
 cp /etc/kubernetes/admin.conf /home/kubeuser/.kube/config
